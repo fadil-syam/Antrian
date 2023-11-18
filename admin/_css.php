@@ -15,7 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="admin/bootstrap.min.css" rel="stylesheet">
+    <link href="atribut/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="admin/style.css" rel="stylesheet">
+    <link href="atribut/style.css" rel="stylesheet">

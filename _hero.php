@@ -1,19 +1,39 @@
 <div class="container-fluid mt-5 pt-5">
-    <div class="row mt-4 ms-1">
-        <div class="col-5 text-bg-primary">
-            <div class="mt-3">
-            <p class="fs-2 text-center mt-auto">NO ANTRIAN</p>
-            <hr class="border border-3 opacity-75">
-            </div>
+  <div class="row  mt-4 ms-1">
+    <div class="col-5 text-bg-primary">
+      
+      <div class="mt-3">
+        <p class="fs-2 text-center mt-auto">NO ANTRIAN</p>
+        <hr class="border border-3 opacity-75">
+      </div>
 
-            <div class="my-auto"><h1 class="title fs-1 text-center my-auto">20</h1></div>           
-        </div>
+      <div class="my-auto">
+        <h1 class="title text-center my-auto" style="font-size:100px;">
+          <?php
+            // Cek apakah nilai GET sudah diberikan
+            if (isset($_GET['kodea']) || isset($_GET['kodeb'])) {           
+                if (isset($_GET['kodea'])) {
+                    echo $_GET['kodea'];
+                }
+                if (isset($_GET['kodeb'])) {
+                    echo $_GET['kodeb'];
+                }
+            } else {
+                // Kedua nilai kosong atau belum diberikan
+                echo "--";
+            }
+          ?>
+    
+        </h1>
+      </div>           
+      </div>
         <div class="col-7">
             <div class="ratio ratio-16x9">
                 <iframe src="https://www.youtube.com/embed/fZEeBRYSGwY?si=M8McRkuV6yGLZhKI" title="YouTube video" allowfullscreen></iframe>
             </div>
-        </div>
+
     </div>
+  </div>
 </div>
 
 <br>
@@ -24,7 +44,18 @@
       <h5 class="text-center mt-2 text-light my-auto">Pengaduan</h5>
       <hr class="shadow-xl mt-1">
       <div class="card-body">
-        <h1 class="card-title text-center text-light my-auto">A0</h1>
+        <h1 class="card-title text-center text-light my-auto">
+          <?php 
+              if (isset($_GET['kodea']) && !empty($_GET['kodea'])) {
+                  $nilai = $_GET['kodea'];
+                  echo $nilai;
+              } else {
+                  echo "--";
+              } 
+
+         
+          ?>  
+        </h1>
       </div>
     </div>
   </div>
@@ -33,7 +64,15 @@
       <h5 class="text-center mt-2 text-light my-auto">Perbaikan</h5>
       <hr class="shadow-xl mt-1">
       <div class="card-body">
-        <h1 class="card-title text-center text-light my-auto">B0</h1>
+        <h1 class="card-title text-center text-light my-auto">
+          <?php if (isset($_GET['kodeb']) && !empty($_GET['kodeb'])) {
+                  $nilai = $_GET['kodeb'];
+                  echo $nilai;
+              } else {
+                  echo "--";
+              } 
+          ?>  
+        </h1>
       </div>
     </div>
   </div>

@@ -1,5 +1,6 @@
 <?php 
-require_once('conneksi.php');
+require_once('../conneksi.php');
+require_once('../crud.php');
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +8,7 @@ require_once('conneksi.php');
 <head>
     <meta charset="utf-8">
     <title>Dashboard Admin</title>
-    <?php require_once('_css.php'); ?>
+    <?php include '_css.php'; ?>
 </head>
 
 <body>
@@ -32,7 +33,17 @@ require_once('conneksi.php');
                 <div class="navbar-nav w-100">
                     <a href="admin.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="dataantrian.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
-                    <a href="datauser.php" class="nav-item nav-link"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
+                    <a href="datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Elements</a>
+                    <div class="nav-item dropdown">
+                        <a href="datauserloket.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="datauserloket.php" class="dropdown-item">Loket 1</a>
+                            <a href="_datauserloket-b.php" class="dropdown-item">Loket 2</a>
+                            <a href="#" class="dropdown-item">Loket 3</a>
+                            <a href="#" class="dropdown-item">Loket 4</a>
+                            <a href="#" class="dropdown-item">Loket 5</a>
+                        </div>
+                    </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
                 </div>
@@ -42,7 +53,7 @@ require_once('conneksi.php');
 
         <!-- Content Start -->
         <div class="content">
-            <?php require_once('admin/_navbar.php'); ?>
+            <?php require_once('atribut/_navbar.php'); ?>
 
             <!-- Blank Start -->
             <h1 class="mx-4 mt-2 fs-1 fw-bold">Dashboard</h1>
@@ -93,7 +104,7 @@ require_once('conneksi.php');
             </div>
 
             <!-- Blank End -->
-            <?php require_once('admin/_footer.php'); ?>
+            <?php require_once('atribut/_footer.php'); ?>
         </div>
         <!-- Content End -->
         <!-- Back to Top -->
@@ -104,7 +115,7 @@ require_once('conneksi.php');
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Template Javascript -->
-    <script src="admin/main.js"></script>
+    <script src="atribut/main.js"></script>
 </body>
 
 </html>
