@@ -1,10 +1,10 @@
 <?php
-include "../conneksi.php";
+include "../../conneksi.php";
 
 session_start();
 // Periksa jika pengguna belum login, redirect ke halaman login jika belum
 if (!isset($_SESSION['username'])) {
-    header("Location: ../login.php");
+    header("Location: ../../login.php");
     exit();
 }
 
@@ -15,9 +15,8 @@ if (!isset($_SESSION['username'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>datauser loket A</title>
+    <title>datauser loket D</title>
     <?php require_once('_css.php'); ?>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -44,20 +43,20 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="admin.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="../index.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
-                    <a href="datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Elements</a>
+                    <a href="../admin.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="../../index.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
+                    <a href="../datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Elements</a>
                     <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="datauserloket.php" class="dropdown-item active">Loket 1</a>
-                            <a href="datauserloket/_datauserloket-b.php" class="dropdown-item">Loket 2</a>
-                            <a href="datauserloket/_datauserloket-c.php" class="dropdown-item">Loket 3</a>
-                            <a href="datauserloket/_datauserloket-d.php" class="dropdown-item">Loket 4</a>
-                            <a href="datauserloket/_datauserloket-e.php" class="dropdown-item">Loket 5</a>
+                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a><div class="dropdown-menu bg-transparent border-0">
+                            <a href="../datauserloket.php" class="dropdown-item">Loket 1</a>
+                            <a href="_datauserloket-b.php" class="dropdown-item">Loket 2</a>
+                            <a href="_datauserloket-c.php" class="dropdown-item">Loket 3</a>
+                            <a href="_datauserloket-d.php" class="dropdown-item active">Loket 4</a>
+                            <a href="_datauserloket-e.php" class="dropdown-item">Loket 5</a>
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>
-                    <a href="rekap.php" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
+                    <a href="../rekap.php" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
                 </div>
             </nav>
         </div>
@@ -65,13 +64,13 @@ if (!isset($_SESSION['username'])) {
 
         <!-- Content Start -->
         <div class="content">
-            <?php require_once('atribut/_navbar.php'); ?>
+            <?php require_once('../atribut/_navbar.php'); ?>
             
             <!-- Blank Start -->
             <div class="container">
                 <br>
                 <table class="table caption-top">
-                <caption>Panggil Antrian Pengaduan di Loket A</caption>
+                <caption>Panggil Antrian Pengaduan di Loket D</caption>
                 <thead>
                     <tr>
                     <th scope="col">No</th>
@@ -79,30 +78,30 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Kode.Antrian</th>
                     <th scope="col">Panggil</th>
                     <th scope="col">Panggil.Ulang</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $query = mysqli_query($conn,"SELECT * from loketa");
+                    <?php $query = mysqli_query($conn,"SELECT * from loketd");
                         $no=1;
                         while ($data = mysqli_fetch_array($query)){ ?>     
                         <tr>
                             <th scope="row"><?php echo $no;$no++; ?></th>
-                            <td><?php echo $data['mejaa']; ?></td>
-                            <td><?php echo $data['kodea']; ?></td>
+                            <td><?php echo $data['mejad']; ?></td>
+                            <td><?php echo $data['koded']; ?></td>
                             <td>
                                 <?php if ($data['status'] == 1): ?>
                                     <!-- <button class="btn btn-secondary" disabled>Panggil</button> -->
-                                    <a href='componen/deactif.php?kodea=<?php echo $data['kodea']; ?>' class='btn btn-disable'>Panggil</a>
+                                    <a href='../componen/deactif.php?koded=<?php echo $data['koded']; ?>' class='btn btn-disable'>Panggil</a>
                                 <?php else: ?>
-                                    <a href='componen/actif.php?kodea=<?php echo $data['kodea']; ?>&mejaa=<?php echo $data['mejaa']; ?>' class='btn btn-primary'>
+                                    <a href='../componen/actif.php?koded=<?php echo $data['koded']; ?>&mejad=<?php echo $data['mejad']; ?>' class='btn btn-primary'>
                                         Panggil 
                                     </a>
                                 <?php endif; ?>
                             </td>
                             <td>
                                 <button id="playButton" class="btn btn-warning">Panggil.Ulang</button>
-                                <audio id="audioPlayer" src="../audio/a/<?= $data['kodea'];?>.m4a" type="audio/mp4"></audio>
+                                <audio id="audioPlayer" src="../../audio/a/<?= $data['koded'];?>.m4a" type="audio/mp4"></audio>
                             </td>
                             <td>
                                 <?php if ($data['status'] == 1): ?>
@@ -121,15 +120,14 @@ if (!isset($_SESSION['username'])) {
                 </table>
             </div> 
             <!-- Blank End -->
-            <?php require_once('atribut/_footer.php'); ?>
+            <?php require_once('../atribut/_footer.php'); ?>
         </div>
         <!-- Content End -->
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    
-    <?php include "_js.php" ?>
+    <?php include "../_js.php" ?>
 </body>
 
 </html>

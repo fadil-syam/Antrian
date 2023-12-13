@@ -22,7 +22,6 @@ $resault5 = mysqli_query($conn,"SELECT * from lokete");
     <meta charset="utf-8">
     <title>Data User</title>
     <?php require_once('_css.php'); ?>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -40,13 +39,13 @@ $resault5 = mysqli_query($conn,"SELECT * from lokete");
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0"> <!--  --> </h6>
-                        <span>Admin</span>
+                        <span>Rekap Antrian</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
                     <a href="admin.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="dataantrian.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
-                    <a href="datauser.php" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>Elements</a>
+                    <a href="datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Elements</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -58,7 +57,7 @@ $resault5 = mysqli_query($conn,"SELECT * from lokete");
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>
-                    <a href="rekap.php" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
+                    <a href="rekap.php" class="nav-item nav-link active"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
                 </div>
             </nav>
         </div>
@@ -70,59 +69,6 @@ $resault5 = mysqli_query($conn,"SELECT * from lokete");
 
             <!-- Blank Start -->
             <div class="container">
-                <form class="" action="delete.php" method="post">
-                    <input class="btn bg-primary text-light" type="submit" value="Mulai"/>
-                </form>
-                <table class="table caption-top">
-                <caption>List user di Loket A</caption>
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Tujuan</th>
-                    <th scope="col">Jml.Antrian</th>
-                    <th scope="col">Tanggal.Antrian</th>
-                    <th scope="col">Kode.Awalan</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Simpan Hasil ke rekap</th>
-                    </tr>
-                </thead>
-                <tbody>    
-                    <?php include "../crud.php";?>     
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Pengaduan</td>
-                        <td><?=$count1;?></td>
-                        <td>8</td>
-                        <td>A</td>
-                        <td>
-                            <?php 
-                                $query = mysqli_query($conn, "SELECT * from admin");
-                                foreach ($query as $admin) { 
-                                ?>
-                                    <?php if ($admin['status'] == 1): ?>
-                                        <a href='componen/_deaktif.php?id=<?php echo $admin['id']; ?>' class='btn btn-sm btn-secondary'>Selesai</a>
-                                    <?php else: ?>
-                                        <a href='componen/_aktif.php?id=<?php echo $admin['id']; ?>' class='btn btn-sm btn-primary'>Mulai</a>
-                                    <?php endif;  ?>
-                                <?php 
-                                } 
-                            ?>
-                        </td>
-                        <td>
-                            <form action="delete.php" method="post">
-                                <input class="btn btn-sm bg-primary text-light" type="submit" value="Simpan"/>
-                            </form>
-                        </td>
-                    </tr>    
-                </tbody>
-
-                
-
-                </table>
-                <form class="ms-auto" action="delete.php" method="post">
-                    <input class="btn bg-primary text-light" type="submit" value="Simpan Rekap Hasil Antrian Hari Ini" />
-                </form>
-
                 <table class="table caption-top">
                 <caption>Rekap Pengunjung Yang Datang</caption>
                 <thead>
@@ -155,7 +101,6 @@ $resault5 = mysqli_query($conn,"SELECT * from lokete");
                 </tbody>
                 </table>
             </div>
-            
             <!-- Blank End -->
             <?php require_once('atribut/_footer.php'); ?>
         </div>
@@ -163,19 +108,6 @@ $resault5 = mysqli_query($conn,"SELECT * from lokete");
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
-
-    <script>
-        // jQuery untuk menangani perubahan checkbox dan label
-        $(document).ready(function() {
-            $("#deleteCheckbox").change(function() {
-                if(this.checked) {
-                    $("#deleteLabel").removeClass("bg-primary text-light").addClass("bg-success text-light").text("Selesai");
-                } else {
-                    $("#deleteLabel").removeClass("bg-success text-light").addClass("bg-primary text-light").text("Mulai");
-                }
-            });
-        });
-    </script>
 
      <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

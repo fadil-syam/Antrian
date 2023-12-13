@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"]== "POST")
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Info Antrian Mu</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="<?php echo($_SERVER["PHP_SELF"]) ?>" method="post">
+      <form action="<?php echo($_SERVER["PHP_SELF"]) ?>" method="post" id="live_data">
       <input type="hidden" name="a" value="a">
 
         <div class="modal-body">
@@ -91,7 +91,6 @@ if($_SERVER["REQUEST_METHOD"]== "POST")
     </div>
   </div>
 </div>
-
 
 
 <!-- B -->

@@ -1,5 +1,12 @@
 <?php
 include "../conneksi.php";
+
+session_start();
+// Periksa jika pengguna belum login, redirect ke halaman login jika belum
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,14 +44,14 @@ include "../conneksi.php";
                         <a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="datauserloket.php" class="dropdown-item">Loket 1</a>
-                            <a href="_datauserloket-b.php" class="dropdown-item">Loket 2</a>
-                            <a href="#" class="dropdown-item">Loket 3</a>
-                            <a href="#" class="dropdown-item">Loket 4</a>
-                            <a href="#" class="dropdown-item">Loket 5</a>
+                            <a href="datauserloket/_datauserloket-b.php" class="dropdown-item">Loket 2</a>
+                            <a href="datauserloket/_datauserloket-c.php" class="dropdown-item">Loket 3</a>
+                            <a href="datauserloket/_datauserloket-d.php" class="dropdown-item">Loket 4</a>
+                            <a href="datauserloket/_datauserloket-e.php" class="dropdown-item">Loket 5</a>
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>
-                    <a href="#" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
+                    <a href="rekap.php" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
                 </div>
             </nav>
         </div>
@@ -56,7 +63,24 @@ include "../conneksi.php";
 
             <!-- Blank Start -->
             
-            
+            <td>
+                            <form action="componen/actif.php" method="post">
+                                <input type="hidden" name="kodea" value="<?php echo $data['kodea']; ?>">
+                                <button type="submit" class='btn btn-primary' name="submit">Panggil</button>
+                            </form>
+                            
+
+                            <td>
+                                <?php 
+                                // if($data['statusa'] == 0) { ?>
+                                    <!-- <button class="btn btn-sm btn-primary" id="pangil">pangil</button> -->
+                                <?php //} ?>
+                                <a id="playButton" href="../index.php?kodea=<?= $data["kodea"]?>"> 
+                                <button class="btn btn-primary" id="pangil">Panggil</button>
+                                 <audio id="audioPlayer" src="../audio/a/<?= $data['kodea'];?>.m4a" type="audio/mp4"></audio>
+                                </a>
+                            </td>
+
             <!-- Blank End -->
             <?php require_once('atribut/_footer.php'); ?>
         </div>

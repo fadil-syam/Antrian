@@ -1,6 +1,14 @@
 <?php 
 require_once('../conneksi.php');
 require_once('../crud.php');
+
+session_start();
+// Periksa jika pengguna belum login, redirect ke halaman login jika belum
+if (!isset($_SESSION['username'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +35,7 @@ require_once('../crud.php');
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0"> <!--  --> </h6>
-                        <span>Admin</span>
+                        <span><?= $_SESSION['username']; ?>!</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
@@ -38,14 +46,14 @@ require_once('../crud.php');
                         <a href="datauserloket.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="datauserloket.php" class="dropdown-item">Loket 1</a>
-                            <a href="_datauserloket-b.php" class="dropdown-item">Loket 2</a>
-                            <a href="#" class="dropdown-item">Loket 3</a>
-                            <a href="#" class="dropdown-item">Loket 4</a>
-                            <a href="#" class="dropdown-item">Loket 5</a>
+                            <a href="datauserloket/_datauserloket-b.php" class="dropdown-item">Loket 2</a>
+                            <a href="datauserloket/_datauserloket-c.php" class="dropdown-item">Loket 3</a>
+                            <a href="datauserloket/_datauserloket-d.php" class="dropdown-item">Loket 4</a>
+                            <a href="datauserloket/_datauserloket-e.php" class="dropdown-item">Loket 5</a>
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>
-                    <a href="#" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
+                    <a href="rekap.php" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
                 </div>
             </nav>
         </div>
@@ -54,7 +62,6 @@ require_once('../crud.php');
         <!-- Content Start -->
         <div class="content">
             <?php require_once('atribut/_navbar.php'); ?>
-
             <!-- Blank Start -->
             <h1 class="mx-4 mt-2 fs-1 fw-bold">Dashboard</h1>
 
@@ -64,7 +71,7 @@ require_once('../crud.php');
                     <div class="card bg-light">      
                     <div class="card-body d-flex">
                         <h1 class="card-title text-primary m-1">A-</h1>
-                        <p class="card-text ms-auto">loket antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count1;?></a> </p>
+                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count1;?></a> </p>
                         
                     </div>
                     </div>
@@ -73,7 +80,7 @@ require_once('../crud.php');
                     <div class="card bg-light">      
                     <div class="card-body d-flex">
                         <h1 class="card-title text-primary m-1">B-</h1>
-                        <p class="card-text ms-auto">loket antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count2;?></a> </p>
+                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count2;?></a> </p>
                     </div>
                     </div>
                 </div>
@@ -81,7 +88,7 @@ require_once('../crud.php');
                     <div class="card bg-light">      
                     <div class="card-body d-flex">
                         <h1 class="card-title text-primary m-1">C-</h1>
-                        <p class="card-text ms-auto">loket antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count3;?></a> </p>
+                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count3;?></a> </p>
                     </div>
                     </div>
                 </div>
@@ -89,7 +96,7 @@ require_once('../crud.php');
                     <div class="card bg-light">      
                     <div class="card-body d-flex">
                         <h1 class="card-title text-primary m-1">D-</h1>
-                        <p class="card-text ms-auto">loket antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count4;?></a> </p>
+                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count4;?></a> </p>
                     </div>
                     </div>
                 </div>
@@ -97,7 +104,7 @@ require_once('../crud.php');
                     <div class="card bg-light">      
                     <div class="card-body d-flex">
                         <h1 class="card-title text-primary m-1">E-</h1>
-                        <p class="card-text ms-auto">loket antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count5;?></a> </p>
+                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count5;?></a> </p>
                     </div>
                     </div>
                 </div>
