@@ -1,6 +1,6 @@
-<?php 
-require_once('../conneksi.php');
-require_once('crud.php');
+<?php
+include "../conneksi.php";
+include "crud.php";
 
 session_start();
 // Periksa jika pengguna belum login, redirect ke halaman login jika belum
@@ -9,19 +9,45 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Mengambil data dari formulir
+    $datameja = $_POST["dataMeja"];
+    $count = $_POST["count"];
+    $dataType = $_POST["dataType"];
+    $data = $_POST["data"];
+
+    // Simpan data ke dalam file
+    $content = "DataMeja: $datameja, Count: $count, DataType: $dataType, Data: $data\n";
+    file_put_contents("rekap_data.txt", $content, FILE_APPEND);
+
+    // Hapus semua data dari tabel loketa
+    $hapus_query = "DELETE FROM loketa WHERE mejaa = '$datameja'";
+    $hapus_query = "DELETE FROM loketb WHERE mejab = '$datameja'";
+    $hapus_query = "DELETE FROM loketc WHERE mejac = '$datameja'";
+    $hapus_query = "DELETE FROM loketd WHERE mejad = '$datameja'";
+    $hapus_query = "DELETE FROM lokete WHERE mejae = '$datameja'";
+    $hapus_result = mysqli_query($conn, $hapus_query);
+
+    // Memeriksa hasil query penghapusan data
+    if ($hapus_result) {
+        echo "Data berhasil dipindahkan ke rekap_data.txt dan dihapus dari tabel loketa.";
+    } else {
+        echo "Terjadi kesalahan saat menghapus data: " . mysqli_error($conn);
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <title>Dashboard Admin</title>
-    <?php include '_css.php'; ?>
+    <title>Rekap Antrian</title>
+    <?php require_once('_css.php'); ?>
 </head>
 
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
-
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
@@ -35,15 +61,15 @@ if (!isset($_SESSION['username'])) {
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0"> <!--  --> </h6>
-                        <span><?= $_SESSION['username']; ?>!</span>
+                        <span>Rekap Antrian</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="admin.php" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="../index.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
+                    <a href="admin.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="dataantrian.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
                     <a href="datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Pengaturan</a>
                     <div class="nav-item dropdown">
-                        <a href="datauserloket.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <?php if ($admin['status'] == 1): ?>
                                     <a href="datauserloket.php" class="dropdown-item">Loket 1</a>
@@ -73,7 +99,7 @@ if (!isset($_SESSION['username'])) {
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>
-                    <a href="rekap.php" class="nav-item nav-link"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
+                    <a href="rekap.php" class="nav-item nav-link active"><i class="bi bi-folder-fill me-2"></i>Rekap Antrian</a>
                 </div>
             </nav>
         </div>
@@ -82,56 +108,52 @@ if (!isset($_SESSION['username'])) {
         <!-- Content Start -->
         <div class="content">
             <?php require_once('atribut/_navbar.php'); ?>
-            <!-- Blank Start -->
-            <!-- <h1 class="mx-4 mt-2 fs-1 fw-bold">Dashboard</h1> -->
-            <div class="container bg-light mt-5 ms-1">
-            <!--<div class="fs-5 text-dark mb-1 mx-4 mt-4">Jumlah Antrian Saat Ini</div> -->
-            <caption class="bg-light ">Jumlah Antrian Saat Ini</caption>
-            <div class="row row-cols-1 row-cols-md-4 g-3">
-                <div class="col">
-                    <div class="card bg-light">      
-                    <div class="card-body d-flex">
-                        <h1 class="card-title text-primary m-1">A-</h1>
-                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count1;?></a> </p>
-                        
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card bg-light">      
-                    <div class="card-body d-flex">
-                        <h1 class="card-title text-primary m-1">B-</h1>
-                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count2;?></a> </p>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card bg-light">      
-                    <div class="card-body d-flex">
-                        <h1 class="card-title text-primary m-1">C-</h1>
-                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count3;?></a> </p>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card bg-light">      
-                    <div class="card-body d-flex">
-                        <h1 class="card-title text-primary m-1">D-</h1>
-                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count4;?></a> </p>
-                    </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card bg-light">      
-                    <div class="card-body d-flex">
-                        <h1 class="card-title text-primary m-1">E-</h1>
-                        <p class="card-text ms-auto">Jmlh antrian hari ini <br><a class="fs-5 fw-bold text-dark"><?=$count5;?></a> </p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            </div>
 
+            <!-- Blank Start -->
+            <div class="container">
+                <h2>Rekap Data</h2>
+                
+                <table class="table caption-top">
+                <caption>Rekap Pengunjung Yang Datang</caption>
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tujuan</th>
+                    <th scope="col">Jml.Antrian</th>
+                    <th scope="col">Meja</th>
+                    <th scope="col">Tanggal.Bulan.Tahun</th>
+                    <th scope="col">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                        // Baca data dari file "rekap_data.txt" dan tampilkan dalam tabel
+                        $rekapData = file_get_contents("rekap_data.txt");
+                        $lines = explode("\n", $rekapData);
+
+                        foreach ($lines as $index => $line) {
+                            if (!empty($line)) {
+                                $columns = explode(",", $line);
+                    ?>    
+                    <tr>
+                        <th scope="row"><?= $index + 1 ?></th>
+                        <td><?= trim(explode(":", $columns[0])[1]); ?></td>
+                        <td><?= trim(explode(":", $columns[1])[1]); ?></td>
+                        <td><?= trim(explode(":", $columns[2])[1]); ?></td>
+                        <td><?= trim(explode(":", $columns[3])[1]); ?></td>
+                        <td>
+                            <form method="post" action="hapus_baris.php">
+                                <input type="hidden" name="index" value="<?= $index ?>">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus baris ini?')">Hapus</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php } } ?>
+                </tbody>
+                </table>
+
+
+            </div>
             <!-- Blank End -->
             <?php require_once('atribut/_footer.php'); ?>
         </div>
@@ -141,10 +163,12 @@ if (!isset($_SESSION['username'])) {
     </div>
 
      <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Template Javascript -->
     <script src="atribut/main.js"></script>
+    
 </body>
 
 </html>

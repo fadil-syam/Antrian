@@ -1,5 +1,6 @@
 <?php
 include "../../conneksi.php";
+include "crud.php";
 
 session_start();
 // Periksa jika pengguna belum login, redirect ke halaman login jika belum
@@ -45,14 +46,35 @@ if (!isset($_SESSION['username'])) {
                 <div class="navbar-nav w-100">
                     <a href="../admin.php" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="../../index.php" class="nav-item nav-link"><i class="bi bi-credit-card-2-front-fill me-2"></i>Antrian</a>
-                    <a href="../datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Elements</a>
+                    <a href="../datauser.php" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Pengaturan</a>
                     <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a><div class="dropdown-menu bg-transparent border-0">
-                            <a href="../datauserloket.php" class="dropdown-item">Loket 1</a>
-                            <a href="_datauserloket-b.php" class="dropdown-item">Loket 2</a>
-                            <a href="_datauserloket-c.php" class="dropdown-item active">Loket 3</a>
-                            <a href="_datauserloket-d.php" class="dropdown-item">Loket 4</a>
-                            <a href="_datauserloket-e.php" class="dropdown-item">Loket 5</a>
+                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="bi bi-volume-up-fill me-2"></i>Pangil Antrian</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <?php if ($admin['status'] == 1): ?>
+                                    <a href="../datauserloket.php" class="dropdown-item">Loket 1</a>
+                                <?php else: ?>
+                                    <a href="" class="dropdown-item disabled">Loket 1</a>
+                                <?php endif; ?>
+                            <?php if ($admin['status2'] == 1): ?>
+                                    <a href="_datauserloket-b.php" class="dropdown-item">Loket 2</a>
+                                <?php else: ?>
+                                    <a href="" class="dropdown-item disabled">Loket 2</a>
+                                <?php endif; ?>
+                            <?php if ($admin['status3'] == 1): ?>
+                                    <a href="_datauserloket-c.php" class="dropdown-item active">Loket 3</a>
+                                <?php else: ?>
+                                    <a href="" class="dropdown-item disabled">Loket 3</a>
+                                <?php endif; ?>
+                            <?php if ($admin['status4'] == 1): ?>
+                                    <a href="_datauserloket-d.php" class="dropdown-item">Loket 4</a>
+                                <?php else: ?>
+                                    <a href="" class="dropdown-item disabled">Loket 4</a>
+                                <?php endif; ?>
+                            <?php if ($admin['status5'] == 1): ?>
+                                    <a href="_datauserloket-e.php" class="dropdown-item">Loket 5</a>
+                                <?php else: ?>
+                                    <a href="" class="dropdown-item disabled">Loket 5</a>
+                                <?php endif; ?>
                         </div>
                     </div>
                     <a href="#" class="nav-item nav-link"><i class="bi bi-printer-fill me-2"></i>Setting Printer</a>

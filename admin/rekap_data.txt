@@ -1,0 +1,11 @@
+DataMeja: Pengaduan, Count: 0, DataType: A, Data: tidak ada data
+DataMeja: Pengaduan, Count: 0, DataType: A, Data: tidak ada data
+DataMeja: Perbaikan, Count: 0, DataType: B, Data: tidak ada data
+DataMeja: Meet, Count: 0, DataType: C, Data: tidak ada data
+DataMeja: Tamu, Count: 0, DataType: D, Data: tidak ada data
+DataMeja: Pengambilan, Count: 4, DataType: E, Data: 03/October/2023
+DataMeja: Pengambilan, Count: 4, DataType: E, Data: 03/October/2023
+DataMeja: Pengaduan, Count: 2, DataType: A, Data: 18/December/2023
+DataMeja: Pengaduan, Count: 2, DataType: A, Data: 18/December/2023
+DataMeja: Pengaduan, Count: 2, DataType: A, Data: 18/December/2023
+DataMeja: Pengaduan, Count: 2, DataType: A, Data: 18/December/2023
